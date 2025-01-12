@@ -10,8 +10,6 @@ if command -v apt-get > /dev/null; then
     apt-get update && apt-get install -y bc
 elif command -v yum > /dev/null; then
     yum update -y && yum install -y bc
-elif command -v apk > /dev/null; then
-    apk update %% apk add bc
 else
     echo "Could not install bc. Please install it manually."
     exit 1
