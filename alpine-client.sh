@@ -131,7 +131,7 @@ wget -O client https://az-kr.sdcom-ghproxy.us.kg/https://github.com/akile-networ
 chmod 777 client
 
 # Create systemd service file
-cat > /etc/init.d/ak_client.service << 'EOF'
+cat > /etc/init.d/ak_client << 'EOF'
 #!/sbin/openrc-run
 
 # 定义服务的名称变量
@@ -224,13 +224,11 @@ EOF
 
 # Set proper permissions
 chmod 644 /etc/ak_monitor/client.json
-chmod 644 /etc/systemd/system/ak_client.service
-
-# Reload systemd and enable service
-rc-update add ak_client default
+chmod 644 /etc/init.d/ak_client
+chmod +x /etc/init.d/ak_client
 
 # 启动服务
-rc-service ak_client start
+service ak_client start
 
 echo "Installation complete! Service status:"
 rc-service ak_client status
