@@ -14,7 +14,7 @@ else
 fi
 
 # Stop existing service if running
-systemctl stop ak_client
+rc-service ak_client stop
 
 # Function to detect main network interface
 get_main_interface() {
