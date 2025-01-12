@@ -24,7 +24,7 @@ wget -O setup-monitor.sh "https://raw.githubusercontent.com/akile-network/akile_
 ## 被控端
 
 ```
-wget -O setup-client.sh "https://raw.githubusercontent.com/akile-network/akile_monitor/refs/heads/main/setup-client.sh" && chmod +x setup-client.sh && sudo ./setup-client.sh <your_secret> <url> <name>
+wget -O setup-client.sh "https://az-kr.sdcom-ghproxy.us.kg/https://raw.githubusercontent.com/SDCOM-0415/akile_monitor/refs/heads/main/setup-client.sh" && chmod +x setup-client.sh && sudo ./setup-client.sh <your_secret> <url> <name>
 ```
 如
 ```
