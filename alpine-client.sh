@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Install bc based on system package manager
-if command -v apt-get > /dev/null; then
+if command -v apk > /dev/null; then
     apk update && apk add bc
 else
     echo "It's not alpine."
