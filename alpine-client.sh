@@ -31,8 +31,6 @@ get_main_interface() {
            echo "${bytes} B"
        elif [ $bytes -lt 1048576 ]; then # 1024*1024
            echo "$(echo "scale=2; $bytes/1024" | bc) KB"
-       elif [ $bytes -lt 1048576 ]; then # 1024*1024
-           echo "$(echo "scale=2; $bytes/1024" | bc) KB"
        elif [ $bytes -lt 1073741824 ]; then # 1024*1024*1024
            echo "$(echo "scale=2; $bytes/1024/1024" | bc) MB"
        elif [ $bytes -lt 1099511627776 ]; then # 1024*1024*1024*1024
@@ -130,7 +128,7 @@ cd /etc/ak_monitor/
 wget -O client https://az-kr.sdcom-ghproxy.us.kg/https://github.com/akile-network/akile_monitor/releases/latest/download/$CLIENT_FILE
 chmod 777 client
 
-# Create systemd service file
+# Create openrc service file
 cat > /etc/init.d/ak_client << 'EOF'
 #!/sbin/openrc-run
 
@@ -144,7 +142,7 @@ command="/etc/ak_monitor/client"
 # command_args="--param1 value1 --param2 value2"
 
 # 后台运行的选项（通常用于守护进程），这里被注释掉了
-command_background="yes"
+# command_background="yes"
 
 # 提供服务的描述信息
 description="Custom service for ${name}"
@@ -153,20 +151,6 @@ description="Custom service for ${name}"
 depend() {
     # 指定该服务需要网络（net 服务）支持
     need net
-
-    # after 后置强依赖条件
-    # 指定该服务应在 sshd 服务之后启动
-    # after sshd
-
-    # use 非强依赖 
-    # 如果 目标服务存在且已运行，那么当前服务会优先使用它，目标服务不存在未运行，服务依然会启动
-    # 指定该服务要在 logger 服务之后启动
-    # use logger
-    # 指定该服务可以使用 audit
-    # use audit
-    # 指定该服务可以使用 loadkeys
-    # use loadkeys
-
 }
 
 # 在启动服务之前的预处理函数
@@ -181,6 +165,8 @@ start_pre() {
 start() {
     # 打印启动消息
     ebegin "Starting ${name}"
+    # 切换到工作目录
+    cd /etc/ak_monitor/
     # 使用 start-stop-daemon 命令启动服务
     start-stop-daemon --start --exec ${command}
     eend $? # 输出启动操作的结果状态
@@ -207,9 +193,6 @@ restart() {
     start-stop-daemon --start --exec ${command}
     eend $? # 输出重新启动操作的结果状态
 }
-
-
-
 EOF
 
 # Create client configuration
@@ -224,11 +207,13 @@ EOF
 
 # Set proper permissions
 chmod 644 /etc/ak_monitor/client.json
-chmod 644 /etc/init.d/ak_client
-chmod +x /etc/init.d/ak_client
+chmod 755 /etc/init.d/ak_client
 
-# 启动服务
-service ak_client start
+# Add service to default runlevel
+rc-update add ak_client default
+
+# Start service
+rc-service ak_client start
 
 echo "Installation complete! Service status:"
 rc-service ak_client status
