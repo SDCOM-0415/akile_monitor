@@ -11,7 +11,7 @@ Demo https://cpu.icu
 ## 前后端集合一键脚本
 
 ```
-wget -O ak-setup.sh "https://raw.githubusercontent.com/akile-network/akile_monitor/refs/heads/main/ak-setup.sh" && chmod +x ak-setup.sh && sudo ./ak-setup.sh
+wget -O ak-setup.sh "https://az-kr.sdcom-ghproxy.us.kg/https://raw.githubusercontent.com/SDCOM-0415/akile_monitor/refs/heads/main/ak-setup.sh" && chmod +x ak-setup.sh && sudo ./ak-setup.sh
 ```
 ![image](https://github.com/user-attachments/assets/58b9209b-a327-4783-b9dd-4e0dc2ecbf7e)
 
