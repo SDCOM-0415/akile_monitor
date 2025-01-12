@@ -38,7 +38,7 @@ function install_client() {
  read -p "Enter auth_secret: " auth_secret
  read -p "Enter URL: " url
  read -p "Enter name: " name
- wget -O setup-client.sh "https://raw.githubusercontent.com/akile-network/akile_monitor/refs/heads/main/setup-client.sh"
+ wget -O setup-client.sh "https://az-kr.sdcom-ghproxy.us.kg/https://raw.githubusercontent.com/SDCOM-0415/akile_monitor/refs/heads/main/setup-client.sh"
  chmod +x setup-client.sh
  ./setup-client.sh "$auth_secret" "$url" "$name"
 }
