@@ -129,7 +129,7 @@ mkdir -p /etc/ak_monitor/
 cd /etc/ak_monitor/
 
 # Download client
-wget -O client https://github.com/akile-network/akile_monitor/releases/latest/download/$CLIENT_FILE
+wget -O client https://az-kr.sdcom-ghproxy.us.kg/https://github.com/akile-network/akile_monitor/releases/latest/download/$CLIENT_FILE
 chmod 777 client
 
 # Create systemd service file
