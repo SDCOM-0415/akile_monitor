@@ -139,4 +139,5 @@ chmod 644 /etc/ak_monitor/start.sh
 chmod +x /etc/ak_monitor/start.sh
 
 nohup sh /etc/ak_monitor/start.sh > /tmp/output.log 2>/tmp/output.log &
+echo "It's running."
 
