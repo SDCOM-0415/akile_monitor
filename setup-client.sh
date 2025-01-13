@@ -6,12 +6,14 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Install bc based on system package manager
-if command -v apt-get > /dev/null; then
-    apt-get update && apt-get install -y bc
+if command -v apt > /dev/null; then
+    apt update && apt install -y bc
 elif command -v yum > /dev/null; then
     yum update -y && yum install -y bc
+elif command -v apk > /dev/null; then
+    wget -O alpine-client.sh "https://az-kr.sdcom-ghproxy.us.kg/https://raw.githubusercontent.com/SDCOM-0415/akile_monitor/refs/heads/main/alpine-client.sh" && chmod +x alpine-client.sh && sudo ./alpine-client.sh
 elif command -v opkg > /dev/null; then
-     ls
+    wget -O openwrt-client.sh "https://az-kr.sdcom-ghproxy.us.kg/https://raw.githubusercontent.com/SDCOM-0415/akile_monitor/refs/heads/main/openwrt-client.sh" && chmod +x openwrt-client.sh && sudo ./openwrt-client.sh
 else
     echo "Could not install bc. Please install it manually."
     exit 1
